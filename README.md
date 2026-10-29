@@ -57,11 +57,12 @@ WhatsApp پر آرڈر بھیجیں
 // اپنی دکان کی اصل قیمتیں یہاں لکھیں۔
 const products=[
 {name:"آٹا",price:0,image:"https://placehold.co/300x200?text=Flour"},
-{name:"چینی",price:0,image:"https://placehold.co/300x200?text=Sugar"},
-{name:"چاول",price:0,image:"https://placehold.co/300x200?text=Rice"},
-{name:"گھی",price:0,image:"https://placehold.co/300x200?text=Ghee"},
-{name:"دال",price:0,image:"https://placehold.co/300x200?text=Lentils"},
-{name:"دودھ",price:0,image:"https://placehold.co/300x200?text=Milk"}
+{name:"چینی",price:160,image:"https://placehold.co/300x200?text=Sugar"},
+{name:"چاول",price:150,image:"https://placehold.co/300x200?text=Rice"},
+{name:"گھی",price:570,image:"https://placehold.co/300x200?text=Ghee"},
+{name:"دال",price:300,image:"https://placehold.co/300x200?text=Lentils"},
+{name:"دودھ",price:18
+  0,image:"https://placehold.co/300x200?text=Milk"}
 ];
 
 // WhatsApp نمبر
