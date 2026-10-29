@@ -1,0 +1,89 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attiq Utility Store</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#f4f7f2;color:#222}
+header{background:#146b3a;color:white;text-align:center;padding:25px 12px}
+main{max-width:850px;margin:auto;padding:18px}
+.intro{text-align:center}
+.products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.item{background:white;padding:15px 8px;text-align:center;border-radius:12px;box-shadow:0 2px 7px #ddd}
+.emoji{font-size:38px}
+.price{color:#146b3a;font-weight:bold}
+button{background:#146b3a;color:white;border:0;border-radius:8px;padding:11px;cursor:pointer}
+.order{display:block;width:100%;margin-top:18px;font-size:17px}
+footer{text-align:center;padding:20px;color:#555}
+</style>
+</head>
+<body>
+<header>
+<h1>Attiq Utility Store</h1>
+<p>Your Daily Needs, All in One Place!</p>
+</header>
+<main>
+<div class="intro">
+<h2>Welcome to Our Store 🛒</h2>
+<p>Choose groceries and order through WhatsApp.</p>
+</div>
+<h2>Our Products</h2>
+<div class="products" id="products"></div>
+<h2>Your Cart: <span id="count">0</span> items</h2>
+<p id="cart">No items selected yet.</p>
+<button class="order" onclick="orderNow()">Order on WhatsApp</button>
+<p><small>Prices are examples. Confirm prices with the shop.</small></p>
+</main>
+<footer>Thank you for shopping with Attiq Utility Store!</footer>
+<script>
+const phone = "923476972215";
+
+const goods = [
+["🌾","Wheat Flour (Atta)",180],
+["🍚","Rice",150],
+["🍬","Sugar",160],
+["🫒","Cooking Oil",570],
+["🥛","Milk",180],
+["🍪","Biscuits",50],
+["🧂","Salt",40],
+["🧼","Soap",100]
+];
+
+let cart = [];
+const products = document.getElementById("products");
+
+goods.forEach((g,i) => {
+const d = document.createElement("div");
+d.className = "item";
+d.innerHTML = `<div class="emoji">${g[0]}</div>
+<h3>${g[1]}</h3>
+<p class="price">Rs. ${g[2]} (sample)</p>
+<button onclick="addItem(${i})">Add to Cart</button>`;
+products.appendChild(d);
+});
+
+function addItem(i) {
+cart.push(goods[i]);
+document.getElementById("count").textContent = cart.length;
+document.getElementById("cart").textContent =
+cart.map(x => x[1]).join(", ");
+}
+
+function orderNow() {
+if (!cart.length) {
+alert("Please add products first.");
+return;
+}
+
+const msg = "Assalam-o-Alaikum! I want to order from Attiq Utility Store:\n" +
+cart.map(x => x[1] + " - Rs. " + x[2] + " (sample price)").join("\n") +
+"\nPlease confirm availability and prices.";
+
+window.open("https://wa.me/" + phone +
+"?text=" + encodeURIComponent(msg), "_blank");
+}
+</script>
+</body>
+</html>
