@@ -1,6 +1,3 @@
-# Attiq-Utility-Store-
-Attiq Utility Store - Online Grocery Shopping Website. View products, prices and order groceries through WhatsApp.
-
 <!DOCTYPE html>
 <html lang="ur" dir="rtl">
 <head>
@@ -16,8 +13,20 @@ header p{margin:0}
 .notice{text-align:center;padding:12px;background:#e2f2e6}
 h2{text-align:center}
 .products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:12px;max-width:850px;margin:auto}
-.card{background:white;padding:10px;border-radius:12px;text-align:center;box-shadow:0 2px 7px #0001}
-.card img{width:100%;height:125px;object-fit:contain}
+
+/* پروڈکٹ کارڈ اور کراپنگ کا خاص کوڈ */
+.card{background:white;padding:10px;border-radius:12px;text-align:center;box-shadow:0 2px 7px #0001;display:flex;flex-direction:column;align-items:center}
+.img-container{width:125px;height:125px;overflow:hidden;position:relative;border-radius:8px;margin-bottom:8px}
+.img-container img{position:absolute;width:300%;height:200%;object-fit:cover}
+
+/* تصویر کے 6 حصوں کی پوزیشنز */
+.img-flour img { top: 0; left: 0; }
+.img-sugar img { top: 0; left: -100%; }
+.img-rice img { top: 0; left: -200%; }
+.img-ghee img { top: -100%; left: 0; }
+.img-lentils img { top: -100%; left: -100%; }
+.img-milk img { top: -100%; left: -200%; }
+
 .card h3{margin:8px}
 .price{color:#126b3b;font-weight:bold}
 input{width:65px;padding:8px}
@@ -54,18 +63,16 @@ WhatsApp پر آرڈر بھیجیں
 <footer>Attiq Utility Store ❤️<br>آپ کے اعتماد کا شکریہ</footer>
 
 <script>
-// اپنی دکان کی اصل قیمتیں یہاں لکھیں۔
+// یہاں پر تصویر کا نام "image_fvqZ7x.png" استعمال کیا گیا ہے جو آپ کی مین گریڈ تصویر ہے۔
 const products=[
-{name:"آٹا",price:0,image:"https://placehold.co/300x200?text=Flour"},
-{name:"چینی",price:160,image:"https://placehold.co/300x200?text=Sugar"},
-{name:"چاول",price:150,image:"https://placehold.co/300x200?text=Rice"},
-{name:"گھی",price:570,image:"https://placehold.co/300x200?text=Ghee"},
-{name:"دال",price:300,image:"https://placehold.co/300x200?text=Lentils"},
-{name:"دودھ",price:18
-  0,image:"https://placehold.co/300x200?text=Milk"}
+{name:"آٹا",price:120,class:"img-flour",image:"image_fvqZ7x.png"},
+{name:"چینی",price:160,class:"img-sugar",image:"image_fvqZ7x.png"},
+{name:"چاول",price:150,class:"img-rice",image:"image_fvqZ7x.png"},
+{name:"گھی",price:570,class:"img-ghee",image:"image_fvqZ7x.png"},
+{name:"دال",price:300,class:"img-lentils",image:"image_fvqZ7x.png"},
+{name:"دودھ",price:180,class:"img-milk",image:"image_fvqZ7x.png"}
 ];
 
-// WhatsApp نمبر
 const phone="923476972215";
 const cart=[];
 const area=document.getElementById("products");
@@ -73,9 +80,16 @@ const area=document.getElementById("products");
 products.forEach((p,i)=>{
 const card=document.createElement("div");
 card.className="card";
+
+// کراپ کنٹینر بنانا تاکہ صرف مخصوص حصہ نظر آئے
+const imgContainer=document.createElement("div");
+imgContainer.className="img-container "+p.class;
+
 const img=document.createElement("img");
 img.src=p.image;
 img.alt=p.name;
+imgContainer.appendChild(img);
+
 const name=document.createElement("h3");
 name.textContent=p.name;
 const price=document.createElement("p");
@@ -90,7 +104,7 @@ btn.className="add";
 btn.textContent="آرڈر میں شامل کریں";
 btn.onclick=()=>add(i);
 label.appendChild(qty);
-card.append(img,name,price,label,btn);
+card.append(imgContainer,name,price,label,btn);
 area.appendChild(card);
 });
 
@@ -123,9 +137,8 @@ document.getElementById("total").textContent=total;
 lines.push("کل رقم: Rs. "+total);
 lines.push("نام اور پتہ: ");
 document.getElementById("send").href=
-"https://wa.me/"+phone+"?text="+encodeURIComponent(lines.join("\n"));
+"https://wa.me"+phone+"?text="+encodeURIComponent(lines.join("\n"));
 }
 </script>
 </body>
 </html>
-
